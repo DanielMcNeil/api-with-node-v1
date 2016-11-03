@@ -1,0 +1,23 @@
+{
+  "name": "api-with-node-v1",
+  "version": "1.0.0",
+  "description": "Twitter interface build with node and express",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanielMcNeil/api-with-node-v1.git"
+  },
+  "author": "Daniel McNeil",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DanielMcNeil/api-with-node-v1/issues"
+  },
+  "homepage": "https://github.com/DanielMcNeil/api-with-node-v1#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "jade": "^1.11.0"
+  }
+}
