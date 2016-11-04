@@ -3,6 +3,14 @@
 var express = require('express');
 var app = express();
 
+try {
+  require('./env.js');
+} catch(error) {
+  // no env file in production environment
+}
+
+var port = process.env.PORT;
+
 // serve static files in the public directory
 app.use(express.static(__dirname + '/public'));
 
@@ -16,6 +24,6 @@ app.get('/', function(request, response) {
 });
 
 // server
-app.listen(3000, function() {
-  console.log('frontend server is running on port 3000');
+app.listen(port, function() {
+  console.log('frontend server is running on port ' + port);
 });
