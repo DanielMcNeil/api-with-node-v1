@@ -3,6 +3,7 @@
 var express = require('express');
 var app = express();
 
+// load environmental variables when working in local enviroment
 try {
   require('./env.js');
 } catch(error) {
