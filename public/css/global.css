@@ -2124,10 +2124,10 @@ body {
   margin: -3px 15px -3px 0;
 }
 /* line 20, ../sass/global.sass */
-.logo h1 {
-  font-size: 1.8rem;
+.logo h1, .username {
+  font-size: 1.8rem !important;
   font-weight: normal;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.5) !important;
   -webkit-transition: color 0.2s;
   -moz-transition: color 0.2s;
   -ms-transition: color 0.2s;
@@ -2135,8 +2135,8 @@ body {
   transition: color 0.2s;
 }
 /* line 26, ../sass/global.sass */
-.logo:hover h1 {
-  color: #fff;
+.logo:hover h1, .username:hover {
+  color: #fff !important;
 }
 
 /* line 29, ../sass/global.sass */
@@ -2450,7 +2450,7 @@ a:hover .app--avatar {
   position: absolute;
   left: -8px;
   bottom: 0px;
-  background: #a86cc6 url("../images/message-tail.svg") no-repeat;
+  background: #a86cc6 url("../img/message-tail.svg") no-repeat;
   width: 16px;
   height: 20px;
 }
@@ -2487,7 +2487,7 @@ a:hover .app--avatar {
 }
 /* line 267, ../sass/global.sass */
 .app--message--me .app--message--text:after {
-  background: #1da1f2 url("../images/message-tail-me.svg") no-repeat;
+  background: #1da1f2 url("../img/message-tail-me.svg") no-repeat;
   left: auto;
   right: -8px;
 }
