@@ -20,14 +20,8 @@
   },
   "homepage": "https://github.com/DanielMcNeil/api-with-node-v1#readme",
   "dependencies": {
-    "body-parser": "^1.15.2",
-    "connect-ensure-login": "^0.1.1",
-    "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
-    "express-session": "^1.14.2",
-    "jade": "^1.11.0",
-    "morgan": "^1.7.0",
-    "passport": "^0.3.2",
-    "passport-twitter": "^1.0.4"
+    "pug": "^2.0.0-beta6",
+    "twitter": "^1.4.0"
   }
 }
