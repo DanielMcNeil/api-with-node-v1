@@ -19,8 +19,18 @@ app.get('/', function(req, res, next) {
   req.messageList = twitter.messages();
   next();
 }, function(req,res) {
-  // console.dir(req.messageList);
+  // console.dir(req.friendsList);
   res.render('index',{tweets: req.tweetList, friends: req.friendsList.users, messages: req.messageList});
+});
+
+app.get('/post/:tweet', function(req,res,next) {
+  twitter.postTweet(req.params.tweet);
+  next();
+}, function(req,res,next) {
+  req.tweetList = twitter.tweets();
+  next();
+}, function(req,res) {
+  res.json(req.tweetList)
 });
 
 // server

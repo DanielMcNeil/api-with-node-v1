@@ -65,8 +65,19 @@ const getMessages = () => {
   return data;
 };
 
+const postTweet = (tweet) => {
+  client.post('statuses/update', {status: tweet}, function(error, messages, response) {
+    if (messages) {
+      console.log(messages);
+    } else if (error) {
+      console.log(error);
+    }
+  });
+}
+
 module.exports = {
   tweets: getTweets,
   friends: getFriends,
   messages: getMessages,
+  postTweet: postTweet
 };

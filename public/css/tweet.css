@@ -1,0 +1,8 @@
+.disabled, disabled:hover {
+  background-color: #ccc !important;
+  box-shadow: none !important;
+}
+
+.lessthanzero {
+  color: red;
+}
