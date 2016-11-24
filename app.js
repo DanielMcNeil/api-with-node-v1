@@ -19,7 +19,6 @@ app.get('/', function(req, res, next) {
   req.messageList = twitter.messages();
   next();
 }, function(req,res) {
-  // console.dir(req.friendsList);
   res.render('index',{tweets: req.tweetList, friends: req.friendsList.users, messages: req.messageList});
 });
 

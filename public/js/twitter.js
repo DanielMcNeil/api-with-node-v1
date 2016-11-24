@@ -21,7 +21,7 @@ const params = {
 };
 
 const getTweets = () => {
-  var data;
+  let data;
   client.get('statuses/user_timeline', params, function(error, tweets, response) {
     if (tweets) {
       data = tweets;
@@ -36,7 +36,7 @@ const getTweets = () => {
 };
 
 const getFriends = () => {
-  var data;
+  let data;
   client.get('friends/list', params, function(error, friends, response) {
     if (friends) {
       data = friends;
@@ -51,7 +51,7 @@ const getFriends = () => {
 };
 
 const getMessages = () => {
-  var data;
+  let data;
   client.get('direct_messages', params, function(error, messages, response) {
     if (messages) {
       data = messages;
@@ -66,14 +66,20 @@ const getMessages = () => {
 };
 
 const postTweet = (tweet) => {
+  let data;
   client.post('statuses/update', {status: tweet}, function(error, messages, response) {
-    if (messages) {
-      console.log(messages);
+    if (response) {
+      data = response;
+    } else if (messages) {
+      console.dir(messages);
     } else if (error) {
       console.log(error);
     }
   });
-}
+  while(data === undefined) {
+    require('deasync').runLoopOnce();
+  };
+};
 
 module.exports = {
   tweets: getTweets,
