@@ -14,3 +14,8 @@
 .app--message--text--link:hover {
   color: #000;
 }
+
+.error {
+  text-align: center;
+  margin-top: -100px;
+}
