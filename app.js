@@ -3,7 +3,7 @@
 const express = require('express');
 const app = express();
 var port = process.env.PORT || 3000;
-const twitter = require('./public/js/twitter.js');
+const twitter = require('./public/js/twitterAPI.js');
 
 // serve static files in the public directory
 app.use(express.static(__dirname + '/public'));
@@ -17,6 +17,7 @@ app.get('/', function(req, res, next) {
   req.tweetList = twitter.tweets();
   req.friendsList = twitter.friends();
   req.messageList = twitter.messages();
+  console.dir(req.messageList);
   next();
 }, function(req,res) {
   res.render('index',{tweets: req.tweetList, friends: req.friendsList.users, messages: req.messageList});

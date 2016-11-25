@@ -22,6 +22,7 @@ $('#submit-tweet').submit(function(event) {
   $.getJSON('/post/' + tweet, function(data) {
     renderTweets(data);
   });
+  $('#tweet-textarea').val('');
 });
 
 const renderTweets = (data) => {
