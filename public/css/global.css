@@ -2124,7 +2124,7 @@ body {
   margin: -3px 15px -3px 0;
 }
 /* line 20, ../sass/global.sass */
-.logo h1, .username {
+.logo h1 {
   font-size: 1.8rem !important;
   font-weight: normal;
   color: rgba(255, 255, 255, 0.5) !important;

@@ -1,7 +1,68 @@
+// After page loads:
+$(document).ready(function() {
+  // Format timestamp on tweets to display just date
+  formatTimelineTimestamp();
+  // Format timestamp on direct messages to display date and time
+  formatMessageTimestamp();
+  // Highlight any links in direct messages
+  highlightMessageLinks();
+});
+
+const formatTimelineTimestamp = () => {
+  $('.app--tweet--timestamp').each(function() {
+    let dateTime = $(this).html();
+    let formattedDateTime = formatDateTime(dateTime,false);
+    $(this).html(formattedDateTime);
+  });
+}
+
+const formatMessageTimestamp = () => {
+  $('.app--message--timestamp').each(function() {
+    let dateTime = $(this).html();
+    let formattedDateTime = formatDateTime(dateTime,true);
+    $(this).html(formattedDateTime);
+  });
+}
+
+const highlightMessageLinks = () => {
+  $('.app--message--text').each(function() {
+    let message = $(this).html();
+    let formattedMessage = createLinks(message);
+    $(this).html(formattedMessage);
+  });
+}
+
+// Break the timestamp into an array and paste the desired parts of it back together
+const formatDateTime = (dateTime,time) => {
+  let dateTimeArray = dateTime.split('');
+  let dateArray = dateTimeArray.slice(4,10);
+  let year = dateTimeArray.slice((dateTimeArray.length - 4),(dateTimeArray.length)).join('');
+  dateArray.push(', ');
+  dateArray.push(year);
+  if (time === true) {
+    let time = dateTimeArray.slice(10,19).join('');
+    dateArray.push(time);
+  }
+  let datetime = dateArray.join('');
+  return datetime;
+};
+
+// use a regex to detect a link in a text string and turn in into an actual html link
+const createLinks = (text) => {
+    var regex = /(https?:\/\/[^\s]+)/g;
+    return text.replace(regex, function(url) {
+        return '<a class="app--message--text--link" href="' + url + '">' + url + '</a>';
+    });
+};
+
 'use strict';
 
 const characters = 140;
 
+// after every character is typed in the tweet text box:
+// increase or decrese the character counter
+// if there are more than 140 characters, disable the Tweet button and turn the character counter red
+// when there are less than 140 characters, enable the Tweet button and turn the character counter back to gray
 $('#tweet-textarea').keyup(function(){
   let remaining = characters - $(this).val().length;
   $('#tweet-char').html(remaining);
@@ -16,17 +77,32 @@ $('#tweet-textarea').keyup(function(){
   }
 });
 
+// when the Tweet button is clicked
+// show alert if the user didn't type anything in the tweet text box
+// capture tweet text and send to tweet posting API
+// when new tweet data comes back, call the function to render it in the timeline section
+// after the ajax request is finished, run the formatTimelineTimestamp function
+// clear the tweet text box and reset character counter
 $('#submit-tweet').submit(function(event) {
   event.preventDefault();
-  let tweet = $('#tweet-textarea').val();
-  $.getJSON('/post/' + tweet, function(data) {
-    renderTweets(data);
-  });
-  $('#tweet-textarea').val('');
+  if ($('#tweet-char').html() === '140') {
+    alert('You need to type something first');
+  } else {
+    let tweet = $('#tweet-textarea').val();
+    $.post('/tweets',{tweetText: tweet}, function(data) {
+      renderTweets(data);
+    }).done(function() {
+      formatTimelineTimestamp();
+    });
+    $('#tweet-textarea').val('');
+    $('#tweet-char').html('140');
+  }
 });
 
+// use returned tweet data to render the updated timeline section
+// FYI the intentation on this function probably looks really strange
+// I indented it the way you would indent regular html to try to keep it straight in my head
 const renderTweets = (data) => {
-  // console.dir(data);
   let codeBlock = '';
   for (let tweet = 0; tweet < data.length; tweet++) {
     codeBlock += '<li>';
@@ -73,5 +149,4 @@ const renderTweets = (data) => {
   }
   $('.app--tweet--list li').detach();
   $('.app--tweet--list').html(codeBlock);
-  console.log(codeBlock);
 };
