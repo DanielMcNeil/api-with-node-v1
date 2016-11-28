@@ -1,4 +1,4 @@
-# content-scraper
+# API-with-node-v1
 Full Stack JavaScript Techdegree Project 7
 
 A Twitter interface that shows my 5 most current tweets, friends, and direct messages.  Also allows me to post a tweet.
