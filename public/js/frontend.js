@@ -1,3 +1,5 @@
+'use strict';
+
 // After page loads:
 $(document).ready(function() {
   // Format timestamp on tweets to display just date
@@ -14,7 +16,7 @@ const formatTimelineTimestamp = () => {
     let formattedDateTime = formatDateTime(dateTime,false);
     $(this).html(formattedDateTime);
   });
-}
+};
 
 const formatMessageTimestamp = () => {
   $('.app--message--timestamp').each(function() {
@@ -22,7 +24,7 @@ const formatMessageTimestamp = () => {
     let formattedDateTime = formatDateTime(dateTime,true);
     $(this).html(formattedDateTime);
   });
-}
+};
 
 const highlightMessageLinks = () => {
   $('.app--message--text').each(function() {
@@ -30,7 +32,7 @@ const highlightMessageLinks = () => {
     let formattedMessage = createLinks(message);
     $(this).html(formattedMessage);
   });
-}
+};
 
 // Break the timestamp into an array and paste the desired parts of it back together
 const formatDateTime = (dateTime,time) => {
@@ -54,8 +56,6 @@ const createLinks = (text) => {
         return '<a class="app--message--text--link" href="' + url + '">' + url + '</a>';
     });
 };
-
-'use strict';
 
 const characters = 140;
 
@@ -133,7 +133,7 @@ const renderTweets = (data) => {
               codeBlock += '<path d="M49.8,16.7c-0.4-1-1.5-1.7-2.6-1.7h-4.7V2.8c0-1.5-1.3-2.8-2.8-2.8H24.8C23.3,0,22,1.3,22,2.8s1.3,2.8,2.8,2.8h12.1v9.3h-4.7c-1.1,0-2.2,0.7-2.6,1.7c-0.4,1-0.2,2.3,0.6,3.1l7.5,7.5c0.5,0.5,1.3,0.8,2,0.8c0.7,0,1.4-0.3,2-0.8l7.5-7.5C50,18.9,50.2,17.7,49.8,16.7z"></path>';
             codeBlock += '</svg>';
             codeBlock += '<strong>' + data[tweet].retweet_count + '</strong>';
-          codeBlock += '</a>'
+          codeBlock += '</a>';
         codeBlock += '</li>';
         codeBlock += '<li>';
           codeBlock += '<a class="app--like">';
